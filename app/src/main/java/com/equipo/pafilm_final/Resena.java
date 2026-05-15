@@ -9,21 +9,31 @@ public class Resena {
     private float nota;
     private int idUsuario;    // quién hizo la reseña
     private int idContenido;  // a cual peli o seire pertenece
+    private boolean spoiler;  // nuevo para indicar si hay spoiler
 
     //constr
-    public Resena(int idResena, String titulo, String comentario, float nota, int idUsuario, int idContenido) {
+    public Resena(int idResena, String titulo, String comentario, float nota, int idUsuario, int idContenido, boolean spoiler) {
         this.idResena = idResena;
         this.titulo = titulo;
         this.comentario = comentario;
         this.nota = nota;
         this.idUsuario = idUsuario;
         this.idContenido = idContenido;
+        this.spoiler = spoiler;
     }
 
     public Resena() {
     }
 
     //getterysetter
+    public boolean isSpoiler() {
+        return spoiler;
+    }
+
+    public void setSpoiler(boolean spoiler) {
+        this.spoiler = spoiler;
+    }
+
     public int getIdResena() {
         return idResena;
     }

@@ -1,0 +1,11 @@
+[33mcommit 324a5b43db68b82b88a8f25f611520dd01df6336[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: AntonioGit <antoniovelasco.dev@gmail.com>
+Date:   Fri May 15 16:48:35 2026 +0200
+
+    Finalizada la implementación del Modelo incluyendo Daos usando JSON. :)
+
+[33mcommit b8dc8af5406f19e1d35595ca30e1995ae8f38221[m
+Author: AntonioGit <antoniovelasco.dev@gmail.com>
+Date:   Fri May 15 15:23:23 2026 +0200
+
+    Initial commit

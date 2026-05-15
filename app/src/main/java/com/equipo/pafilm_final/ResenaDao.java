@@ -1,112 +1,132 @@
 package com.equipo.pafilm_final;
 
 import android.content.Context;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ResenaDao {
 
-    // sigue la misma estructura que he explicado en contenidoDao
+    private static SQLiteDatabase conectar(Context context) {
+        DatabaseHelper helper = new DatabaseHelper(context);
+        return helper.getWritableDatabase();
+    }
 
-    private static final String FICHERO = "resenas.json";
-
-    public static List<Resena> obtenerResena(Context context) { // lee el fichero y devuelve todas las reseñas en una lista
-        List<Resena> lista = new ArrayList<>();
+    public static void crearResena(Context context, Resena r) {
+        SQLiteDatabase db = conectar(context);
         try {
-            String contenido = GestorFicheros.leerFichero(context, FICHERO);
-            JSONArray array = new JSONArray(contenido);
-            int i = 0;
-            while (i < array.length()) {
-                JSONObject obj = array.getJSONObject(i);
-                Resena r = new Resena();
-                r.setIdResena(obj.getInt("idResena"));
-                r.setTitulo(obj.getString("titulo"));
-                r.setComentario(obj.getString("comentario"));
-                r.setNota((float) obj.getDouble("nota"));
-                r.setIdUsuario(obj.getInt("idUsuario"));
-                r.setIdContenido(obj.getInt("idContenido"));
-                lista.add(r);
-                i++;
-            }
-        } catch (JSONException e) {
+            String sql = "INSERT INTO resenas (idResena, titulo, comentario, nota, idUsuario, idContenido, spoiler) VALUES ("
+                    + r.getIdResena() + ", '" 
+                    + r.getTitulo() + "', '" 
+                    + r.getComentario() + "', " 
+                    + r.getNota() + ", " 
+                    + r.getIdUsuario() + ", " 
+                    + r.getIdContenido() + ", "
+                    + (r.isSpoiler() ? 1 : 0) + ")";
+            db.execSQL(sql);
+            
+            // Actualizar nota media automáticamente
+            ContenidoDao.actualizarNotaMedia(context, r.getIdContenido());
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            db.close();
+        }
+    }
+
+    public static List<Resena> obtenerResenas(Context context) {
+        List<Resena> lista = new ArrayList<>();
+        SQLiteDatabase db = conectar(context);
+        try {
+            String sql = "SELECT * FROM resenas";
+            Cursor rs = db.rawQuery(sql, null);
+            while (rs.moveToNext()) {
+                Resena r = new Resena();
+                r.setIdResena(rs.getInt(0));
+                r.setTitulo(rs.getString(1));
+                r.setComentario(rs.getString(2));
+                r.setNota(rs.getFloat(3));
+                r.setIdUsuario(rs.getInt(4));
+                r.setIdContenido(rs.getInt(5));
+                r.setSpoiler(rs.getInt(6) == 1);
+                lista.add(r);
+            }
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
         }
         return lista;
     }
 
-    private static void guardarResenas(Context context, List<Resena> lista) { // sobreescribe el fichero con la lista actualizada
+    public static List<Resena> obtenerPorUsuario(Context context, int idUsuario) {
+        List<Resena> lista = new ArrayList<>();
+        SQLiteDatabase db = conectar(context);
         try {
-            JSONArray array = new JSONArray();
-            int i = 0;
-            while (i < lista.size()) {
-                Resena r = lista.get(i);
-                JSONObject obj = new JSONObject();
-                obj.put("idResena", r.getIdResena());
-                obj.put("titulo", r.getTitulo());
-                obj.put("comentario", r.getComentario());
-                obj.put("nota", r.getNota());
-                obj.put("idUsuario", r.getIdUsuario());
-                obj.put("idContenido", r.getIdContenido());
-                array.put(obj);
-                i++;
+            String sql = "SELECT * FROM resenas WHERE idUsuario = " + idUsuario;
+            Cursor rs = db.rawQuery(sql, null);
+            while (rs.moveToNext()) {
+                Resena r = new Resena();
+                r.setIdResena(rs.getInt(0));
+                r.setTitulo(rs.getString(1));
+                r.setComentario(rs.getString(2));
+                r.setNota(rs.getFloat(3));
+                r.setIdUsuario(rs.getInt(4));
+                r.setIdContenido(rs.getInt(5));
+                r.setSpoiler(rs.getInt(6) == 1);
+                lista.add(r);
             }
-            GestorFicheros.escribirFichero(context, FICHERO, array.toString());
-        } catch (JSONException e) {
+            rs.close();
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            db.close();
         }
+        return lista;
     }
 
-    public static List<Resena> obtenerPorUsuario(Context context, int idUsuario) { // devuelve todas las reseñas de un usuario concreto
-        List<Resena> lista = obtenerResena(context);
-        List<Resena> resultado = new ArrayList<>();
-        int i = 0;
-        while (i < lista.size()) {
-            if (lista.get(i).getIdUsuario() == idUsuario) {
-                resultado.add(lista.get(i));
+    public static List<Resena> obtenerPorContenido(Context context, int idContenido) {
+        List<Resena> lista = new ArrayList<>();
+        SQLiteDatabase db = conectar(context);
+        try {
+            String sql = "SELECT * FROM resenas WHERE idContenido = " + idContenido;
+            Cursor rs = db.rawQuery(sql, null);
+            while (rs.moveToNext()) {
+                Resena r = new Resena();
+                r.setIdResena(rs.getInt(0));
+                r.setTitulo(rs.getString(1));
+                r.setComentario(rs.getString(2));
+                r.setNota(rs.getFloat(3));
+                r.setIdUsuario(rs.getInt(4));
+                r.setIdContenido(rs.getInt(5));
+                r.setSpoiler(rs.getInt(6) == 1);
+                lista.add(r);
             }
-            i++;
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
         }
-        return resultado;
+        return lista;
     }
 
-    public static List<Resena> obtenerPorContenido(Context context, int idContenido) { // devuelve todas las reseñas de una pelicula o serie concreta
-        List<Resena> lista = obtenerResena(context);
-        List<Resena> resultado = new ArrayList<>();
-        int i = 0;
-        while (i < lista.size()) {
-            if (lista.get(i).getIdContenido() == idContenido) {
-                resultado.add(lista.get(i));
+    public static int nuevoIdResena(Context context) {
+        SQLiteDatabase db = conectar(context);
+        int id = 1;
+        try {
+            Cursor rs = db.rawQuery("SELECT MAX(idResena) FROM resenas", null);
+            if (rs.moveToFirst()) {
+                id = rs.getInt(0) + 1;
             }
-            i++;
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
         }
-        return resultado;
+        return id;
     }
-
-    public static void insertar(Context context, Resena resena) { // añade una reseña nueva al fichero
-        List<Resena> lista = obtenerResena(context);
-        lista.add(resena);
-        guardarResenas(context, lista);
-
-        // Llamamos a ContenidoDao para que actualice la nota media de la pelio serie
-        ContenidoDao.actualizarNotaMedia(context, resena.getIdContenido());
-    }
-
-    public static int nuevoId(Context context) { // genera el siguiente id disponible
-        List<Resena> lista = obtenerResena(context);
-        if (lista.isEmpty()) return 1;
-        int maxId = 0;
-        int i = 0;
-        while (i < lista.size()) {
-            if (lista.get(i).getIdResena() > maxId) {
-                maxId = lista.get(i).getIdResena();
-            }
-            i++;
-        }
-        return maxId + 1;
-    }
-
 }
