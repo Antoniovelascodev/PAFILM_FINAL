@@ -4,3 +4,6 @@
 <h4>Feng Yu Zhang</h4>
 <h4>Pablo Ruiz</h4>
 
+<p><strong>Pafilm</strong>strong> es una aplicación para poder ver y poner reseñas sobre películas o series. El objetivo es poder valorar públicamente una serie/película sin tantos requisitos previos a esta valoración. Nuestra apuesta por realizar esta aplicación se basa en que cualquier persona que desee valorar contenido cinematográfico pueda hacerlo sin necesidad de ninguna titulación ni experiencia en este campo. Estas reseñas deben de estar asignadas a una cuenta por lo cual se deberá de registrar cada usuario que desee agregar una reseña. 
+</p>
+
