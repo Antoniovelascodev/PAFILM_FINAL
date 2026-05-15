@@ -2,13 +2,15 @@ package com.equipo.pafilm_final;
 
 public class Contenido {
 
+    // atributos
     private int idContenido;
     private String titulo;
     private int anio;
     private double nota;
-    private String tipo;       // "Pelicula" o "Serie"
+    private String tipo;       // peli o serie
     private boolean spoiler;
 
+    //constr
     public Contenido(int idContenido, String titulo, int anio, double nota, String tipo, boolean spoiler) {
         this.idContenido = idContenido;
         this.titulo = titulo;
@@ -17,10 +19,10 @@ public class Contenido {
         this.tipo = tipo;
         this.spoiler = spoiler;
     }
-
     public Contenido() {
     }
 
+    //getterysetter
     public int getAnio() {
         return anio;
     }

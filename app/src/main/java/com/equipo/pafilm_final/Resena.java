@@ -5,18 +5,15 @@ public class Resena {
     //atrb
     private int idResena;
     private String titulo;
-    private String tipo;
     private String comentario;
     private float nota;
     private int idUsuario;    // quién hizo la reseña
     private int idContenido;  // a cual peli o seire pertenece
 
     //constr
-
-    public Resena(int idResena, String titulo, String tipo, String comentario, float nota, int idUsuario, int idContenido) {
+    public Resena(int idResena, String titulo, String comentario, float nota, int idUsuario, int idContenido) {
         this.idResena = idResena;
         this.titulo = titulo;
-        this.tipo = tipo;
         this.comentario = comentario;
         this.nota = nota;
         this.idUsuario = idUsuario;
@@ -27,22 +24,6 @@ public class Resena {
     }
 
     //getterysetter
-    public String getComentario() {
-        return comentario;
-    }
-
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
-    }
-
-    public int getIdContenido() {
-        return idContenido;
-    }
-
-    public void setIdContenido(int idContenido) {
-        this.idContenido = idContenido;
-    }
-
     public int getIdResena() {
         return idResena;
     }
@@ -51,12 +32,20 @@ public class Resena {
         this.idResena = idResena;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 
     public float getNota() {
@@ -67,19 +56,19 @@ public class Resena {
         this.nota = nota;
     }
 
-    public String getTipo() {
-        return tipo;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public int getIdContenido() {
+        return idContenido;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setIdContenido(int idContenido) {
+        this.idContenido = idContenido;
     }
 }

@@ -1,5 +1,6 @@
 package com.equipo.pafilm_final;
 
+import android.content.Context;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,12 +10,14 @@ import java.util.List;
 
 public class UsuarioDao {
 
-    private static final String FICHERO = "usuarios.json"; // del fichero que vamos a coger
+    //misma estructura qie en ContenidoDao
 
-    public static List<Usuario> obtenerUsuarios() { // para que añada a la lista todos los usuarios introducidos en el fichero y asi poder mostrarlos
+    private static final String FICHERO = "usuarios.json";
+
+    public static List<Usuario> obtenerUsuarios(Context context) {
         List<Usuario> lista = new ArrayList<>();
         try {
-            String contenido = GestorFicheros.leerFichero(FICHERO);
+            String contenido = GestorFicheros.leerFichero(context, FICHERO);
             JSONArray array = new JSONArray(contenido);
             int i = 0;
             while (i < array.length()) {
@@ -32,7 +35,7 @@ public class UsuarioDao {
         return lista;
     }
 
-    private static void guardarUsuarios(List<Usuario> lista) { // lo pongo privado a que solo se use en esta clase, sobreescribe la lista con lo que se le pase
+    private static void guardarUsuarios(Context context, List<Usuario> lista) {
         try {
             JSONArray array = new JSONArray();
             int i = 0;
@@ -45,14 +48,14 @@ public class UsuarioDao {
                 array.put(obj);
                 i++;
             }
-            GestorFicheros.escribirFichero(FICHERO, array.toString());
+            GestorFicheros.escribirFichero(context, FICHERO, array.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public static Usuario buscarPorId(int id) { // busca ese Usuario por su id
-        List<Usuario> lista = obtenerUsuarios();
+    public static Usuario buscarPorId(Context context, int id) {
+        List<Usuario> lista = obtenerUsuarios(context);
         int i = 0;
         while (i < lista.size()) {
             if (lista.get(i).getIdUsuario() == id) {
@@ -63,8 +66,8 @@ public class UsuarioDao {
         return null;
     }
 
-    public static Usuario login(String nombre, String contrasena) {
-        List<Usuario> lista = obtenerUsuarios();
+    public static Usuario login(Context context, String nombre, String contrasena) { // para hacer login aunque nose muy bien que puedo añadir aqui solo hace login y ya
+        List<Usuario> lista = obtenerUsuarios(context);
         int i = 0;
         while (i < lista.size()) {
             Usuario u = lista.get(i);
@@ -76,24 +79,35 @@ public class UsuarioDao {
         return null;
     }
 
-    public static void insertar(Usuario usuario) { // le mete el usuario nuevo al fichero
-        List<Usuario> lista = obtenerUsuarios(); // creo una lista con lo mismo que treniamos y le añado el usuario nuevo
-        lista.add(usuario);
-        guardarUsuarios(lista); // le pongo la ufncion que he creado antes para asi meterla en la lista directamente
+    public static boolean existeUsuario(Context context, String nombre) { // para ver si existe un usuario accediendo al contexto y devuelve si hay o no
+        List<Usuario> lista = obtenerUsuarios(context);
+        int i = 0;
+        while (i < lista.size()) {
+            if (lista.get(i).getNombreUsuario().equalsIgnoreCase(nombre)) {
+                return true;
+            }
+            i++;
+        }
+        return false;
     }
 
-    public static int nuevoId() { // para saber el nuevo id que hay que ponerle al siguiente usuario
-        List<Usuario> lista = obtenerUsuarios();
+    public static void insertar(Context context, Usuario usuario) { // pa insertar un usuario
+        List<Usuario> lista = obtenerUsuarios(context);
+        lista.add(usuario);
+        guardarUsuarios(context, lista);
+    }
+
+    public static int nuevoId(Context context) { // pa ponerle un id nuevo que se autoaumenta
+        List<Usuario> lista = obtenerUsuarios(context);
         if (lista.isEmpty()) return 1;
         int maxId = 0;
         int i = 0;
         while (i < lista.size()) {
-            if (lista.get(i).getIdUsuario() > maxId) { // si el id es mayor pasa a ser el valor y se le suma 1 al final
+            if (lista.get(i).getIdUsuario() > maxId) {
                 maxId = lista.get(i).getIdUsuario();
             }
             i++;
         }
         return maxId + 1;
     }
-
 }
