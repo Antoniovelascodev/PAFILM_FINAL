@@ -1,11 +1,15 @@
 -- Antonio: Encargado del Modelo
 
+10/05/2026 --
+
+Empezamos con la documentación del proyecto, poniendo en marcha las ideas y teniendo todo claro para por donde empezar y qué debe hacer cada uno
+
 13/05/2026 -- 
 
 Yo me encargo del modelo y ha sido un poco lioso porque habia empezado en eclipse para luego pasarlo a Android Studio pero no son iguales 
 He tenido un par de problemas y me he pasado directamente a hacerlo entero en Android Studio 
 
-14/05/2026
+14/05/2026 --
 
 He creado el repositorio en github y he transfirido todo a mis compañeros ya que sin las clases ni metodos no pueden empezar porque se pueden liar,
 nos hemos organizado en cuanto a los push pull y demas para no cometer fallos en cuanto a coger el proyecto y no tenerlo actualizado, 
@@ -38,4 +42,9 @@ la propia app calcula solo la nota media de la película para que siempre esté 
 También he creado unm metodo para que los ID se pongan solos buscando el número más alto que haya en la tabla + 1 de cada registro tanto contenido como usuario.
 
 Con esto ya se quedan todos los datos guardados en el móvil aunque cierres la aplicación y se queda en la base de datos
+
+
+16/05/2026 --
+
+Termino de agregar un par de cosas a la documentación del proyecto. 
 
