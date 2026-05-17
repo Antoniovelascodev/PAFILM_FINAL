@@ -1,4 +1,4 @@
-package com.equipo.pafilm_final;
+package com.Modelo.pafilm_final;
 
 import android.os.Bundle;
 
