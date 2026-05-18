@@ -1,4 +1,4 @@
-package com.Modelo.pafilm_final;
+package com.Controlador;
 
 import android.content.Context;
 import java.io.BufferedReader;

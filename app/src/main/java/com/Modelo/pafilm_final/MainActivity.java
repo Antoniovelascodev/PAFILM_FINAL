@@ -9,6 +9,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import android.util.Log;
+
+import com.Modelo.pafilm_final.R;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
