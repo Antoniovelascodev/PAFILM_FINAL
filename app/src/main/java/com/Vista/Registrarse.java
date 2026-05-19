@@ -10,13 +10,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.equipo.pafilm_final.R;
 
-public class IniSesion extends AppCompatActivity {
+public class Registrarse extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.pantalla_ini_sesion);
+        setContentView(R.layout.pantalla_registrarse);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
