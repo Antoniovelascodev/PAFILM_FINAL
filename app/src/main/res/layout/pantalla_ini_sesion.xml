@@ -8,7 +8,7 @@
     tools:context="com.Vista.IniSesion">
 
     <EditText
-        android:id="@+id/editTextText6"
+        android:id="@+id/etContraseña"
         android:layout_width="210dp"
         android:layout_height="48dp"
         android:ems="10"
@@ -22,7 +22,7 @@
         tools:text="Contraseña" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnAcceder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Acceder"
@@ -45,7 +45,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btnRegistrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Registrarse"
@@ -56,7 +56,7 @@
         app:layout_constraintVertical_bias="0.736" />
 
     <EditText
-        android:id="@+id/editTextText8"
+        android:id="@+id/etCorreo"
         android:layout_width="210dp"
         android:layout_height="48dp"
         android:ems="10"

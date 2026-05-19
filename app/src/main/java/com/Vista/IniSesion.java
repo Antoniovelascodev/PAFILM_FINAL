@@ -1,6 +1,8 @@
 package com.Vista;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +13,10 @@ import androidx.core.view.WindowInsetsCompat;
 import com.equipo.pafilm_final.R;
 
 public class IniSesion extends AppCompatActivity {
+    EditText etCorreo;
+    EditText etContraseña;
+    Button btnAcceder;
+    Button btnRegistrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

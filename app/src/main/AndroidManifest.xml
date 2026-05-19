@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
@@ -12,10 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PAFILM_FINAL">
         <activity
-            android:name=".vista_registrarse"
+            android:name="com.Vista.Registrarse"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.Vista.IniSesion"
+            android:exported="false" />
+        <activity
+            android:name="com.Vista.Contenido"
+            android:exported="false" />
+        <activity
+            android:name="com.Vista.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
