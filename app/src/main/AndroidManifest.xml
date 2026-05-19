@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PAFILM_FINAL">
         <activity
+            android:name="com.Vista.MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".vista_registrarse"
             android:exported="false" />
         <activity
