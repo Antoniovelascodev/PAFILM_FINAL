@@ -8,21 +8,21 @@
     tools:context="com.Vista.IniSesion">
 
     <EditText
-        android:id="@+id/etContraseña"
+        android:id="@+id/et_ContrasenaIniSesion"
         android:layout_width="210dp"
         android:layout_height="48dp"
         android:ems="10"
         android:inputType="text"
+        android:text="Contraseña"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.482"
-        tools:text="Contraseña" />
+        app:layout_constraintVertical_bias="0.482" />
 
     <Button
-        android:id="@+id/btnAcceder"
+        android:id="@+id/btn_Acceder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Acceder"
@@ -45,7 +45,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/btnRegistrar"
+        android:id="@+id/btn_Registrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Registrarse"
@@ -56,18 +56,18 @@
         app:layout_constraintVertical_bias="0.736" />
 
     <EditText
-        android:id="@+id/etCorreo"
+        android:id="@+id/et_CorreoIniSesion"
         android:layout_width="210dp"
         android:layout_height="48dp"
         android:ems="10"
         android:inputType="text"
+        android:text="Correo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39"
-        tools:text="Correo" />
+        app:layout_constraintVertical_bias="0.39" />
 
     <TextView
         android:id="@+id/textView4"

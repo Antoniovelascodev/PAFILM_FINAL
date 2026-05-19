@@ -8,30 +8,29 @@
     tools:context="com.Vista.Registrarse">
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/et_CorreoRegis"
         android:layout_width="210dp"
         android:layout_height="48dp"
         android:ems="10"
         android:inputType="text"
+        android:text="Correo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.396"
-        tools:text="Correo" />
+        app:layout_constraintVertical_bias="0.396" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_Registrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Registrarse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.676" />
+        app:layout_constraintVertical_bias="0.657" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -46,15 +45,15 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/et_ContrasenaRegis"
         android:layout_width="210dp"
         android:layout_height="48dp"
         android:ems="10"
         android:inputType="text"
+        android:text="Contraseña"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Contraseña" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

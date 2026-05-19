@@ -8,31 +8,29 @@
     tools:context="com.Vista.Contenido">
 
     <EditText
-        android:id="@+id/editTextTextMultiLine4"
-        android:layout_width="210dp"
-        android:layout_height="48dp"
+        android:id="@+id/et_Resena"
+        android:layout_width="351dp"
+        android:layout_height="201dp"
         android:ems="10"
         android:gravity="start|top"
+        android:importantForAutofill="no"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.71"
+        app:layout_constraintVertical_bias="0.813"
         tools:text="Reseña" />
 
     <CheckBox
-        android:id="@+id/checkBox10"
+        android:id="@+id/cb_Serie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="124dp"
-        android:layout_marginBottom="340dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="372dp"
         android:text="Serie"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/checkBox"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText5" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textView8"
@@ -44,47 +42,46 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.198" />
+        app:layout_constraintVertical_bias="0.174" />
 
     <CheckBox
-        android:id="@+id/checkBox11"
+        android:id="@+id/cb_Spoiler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="268dp"
+        android:layout_marginBottom="312dp"
         android:text="Marcar si la reseña contiene spoilers"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTextText11"
+        android:id="@+id/et_Titulo"
         android:layout_width="210dp"
         android:layout_height="48dp"
-        android:layout_marginTop="170dp"
-        android:layout_marginBottom="123dp"
+        android:layout_marginTop="152dp"
         android:ems="10"
+        android:hint="Título"
+        android:importantForAutofill="no"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/checkBox2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.248"
         tools:text="Título" />
 
     <EditText
-        android:id="@+id/editTextText12"
+        android:id="@+id/et_Puntuacion"
         android:layout_width="210dp"
         android:layout_height="48dp"
         android:ems="10"
-        android:inputType="text"
+        android:importantForAutofill="no"
+        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.402"
+        app:layout_constraintVertical_bias="0.36"
         tools:text="Puntuación" />
 
     <TextView
@@ -96,13 +93,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.335" />
+        app:layout_constraintVertical_bias="0.3" />
 
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="118dp"
         android:layout_height="124dp"
         android:src="@drawable/pafilm"
+        android:contentDescription="Logo de la aplicación"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -111,17 +109,25 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <CheckBox
-        android:id="@+id/checkBox12"
+        android:id="@+id/cb_Pelicula"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="116dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="340dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginBottom="372dp"
         android:text="Pelicula"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox2"
         app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_Publicar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Publicar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.937" />
 </androidx.constraintlayout.widget.ConstraintLayout>
