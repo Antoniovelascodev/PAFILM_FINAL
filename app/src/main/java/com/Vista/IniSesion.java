@@ -14,6 +14,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.Controlador.ControladorUsuario;
+import com.Modelo.pafilm_final.Usuario;
 import com.equipo.pafilm_final.R;
 
 public class IniSesion extends AppCompatActivity {
@@ -22,12 +24,15 @@ public class IniSesion extends AppCompatActivity {
     Button btnAccederIniSesion;
     Button btnRegistrarIniSesion;
     ImageView ivLogo;
+    ControladorUsuario controladorUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.pantalla_ini_sesion);
+
+        controladorUsuario = new ControladorUsuario();
 
         etCorreoIniSesion = findViewById(R.id.et_CorreoIniSesion);
         etContrasenaIniSesion = findViewById(R.id.et_ContrasenaIniSesion);
@@ -54,7 +59,7 @@ public class IniSesion extends AppCompatActivity {
             }
         });
 
-        // botón Acceder
+        // Botón Acceder
         btnAccederIniSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,15 +69,21 @@ public class IniSesion extends AppCompatActivity {
                 if (correo.isEmpty() || pass.isEmpty()) {
                     Toast.makeText(IniSesion.this, "Por favor, rellene todos los campos", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Simulación de inicio de sesión exitoso
-                    Toast.makeText(IniSesion.this, "Bienvenido " + correo, Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(IniSesion.this, Contenido.class);
-                    startActivity(intent);
+                    Usuario usuario = controladorUsuario.login(IniSesion.this, correo, pass);
+                    if (usuario != null) {
+                        Toast.makeText(IniSesion.this, "Bienvenido " + usuario.getNombreUsuario(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(IniSesion.this, Contenido.class);
+                        intent.putExtra("idUsuario", usuario.getIdUsuario());
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(IniSesion.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
 
-        // botón Registrarse, lleva a la pantalla de registro
+        // Botón Registrarse, lleva a la pantalla de registro
         btnRegistrarIniSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
