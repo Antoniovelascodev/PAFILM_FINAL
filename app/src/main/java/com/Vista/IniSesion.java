@@ -72,7 +72,7 @@ public class IniSesion extends AppCompatActivity {
                     Usuario usuario = controladorUsuario.login(IniSesion.this, correo, pass);
                     if (usuario != null) {
                         Toast.makeText(IniSesion.this, "Bienvenido " + usuario.getNombreUsuario(), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(IniSesion.this, Contenido.class);
+                        Intent intent = new Intent(IniSesion.this, Selector.class);
                         intent.putExtra("idUsuario", usuario.getIdUsuario());
                         startActivity(intent);
                         finish();

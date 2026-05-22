@@ -20,7 +20,7 @@
             android:name="com.Vista.Contenido"
             android:exported="false" />
         <activity
-            android:name="com.Vista.MainActivity"
+            android:name="com.Vista.Selector"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

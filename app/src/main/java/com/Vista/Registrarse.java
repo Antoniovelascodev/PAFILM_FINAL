@@ -55,7 +55,7 @@ public class Registrarse extends AppCompatActivity {
                 controladorUsuario.registrarUsuario(Registrarse.this, nuevoUsuario);
 
                 Toast.makeText(Registrarse.this, "Registro completado", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Registrarse.this, Contenido.class);
+                Intent intent = new Intent(Registrarse.this, Selector.class);
                 intent.putExtra("idUsuario", nuevoUsuario.getIdUsuario());
                 startActivity(intent);
                 finish();
