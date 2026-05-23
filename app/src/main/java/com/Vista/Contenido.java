@@ -102,11 +102,12 @@ public class Contenido extends AppCompatActivity {
             }
         });
 
-        // Pulsar la imagen hace que vuelvas al inicio de sesión
+        // Pulsar la imagen hace que vuelvas a la pantalla de selección
         ivLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Contenido.this, IniSesion.class);
+                Intent intent = new Intent(Contenido.this, Selector.class);
+                intent.putExtra("idUsuario", idUsuario);
                 startActivity(intent);
             }
         });

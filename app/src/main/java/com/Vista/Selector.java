@@ -45,5 +45,15 @@ public class Selector extends AppCompatActivity {
             }
         });
 
+        // Pulsar el botón Ver todas las reseñas lleva a la pantalla de Reseñas
+        btnVerResenas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Selector.this, Resenas.class);
+                intent.putExtra("idUsuario", idUsuario);
+                startActivity(intent);
+            }
+        });
+
     }
 }

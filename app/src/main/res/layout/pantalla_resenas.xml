@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.Vista.Resenas">
+
+    <!-- Logo igual que en las demás pantallas -->
+
+    <!-- Título de la pantalla -->
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="118dp"
+        android:layout_height="124dp"
+        android:contentDescription="Logo de la aplicación"
+        android:src="@drawable/pafilm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tv_TituloPantalla"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Todas las reseñas"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/scrollResenas"
+        app:layout_constraintVertical_bias="0.8"/>
+
+    <!-- ScrollView que ocupa el resto de la pantalla -->
+    <ScrollView
+        android:id="@+id/scrollResenas"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="130dp"
+        android:contentDescription="Lista de reseñas"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Aquí se añaden las reseñas por código en Resenas.java -->
+        <LinearLayout
+            android:id="@+id/layout_Resenas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
