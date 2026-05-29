@@ -13,14 +13,14 @@
         android:layout_height="201dp"
         android:ems="10"
         android:gravity="start|top"
+        android:hint="Reseña"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.813"
-        tools:text="Reseña" />
+        app:layout_constraintVertical_bias="0.813" />
 
     <CheckBox
         android:id="@+id/cb_Serie"
@@ -69,14 +69,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Título" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/et_Puntuacion"
         android:layout_width="210dp"
         android:layout_height="48dp"
         android:ems="10"
+        android:hint="Puntuación"
         android:importantForAutofill="no"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -84,8 +84,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.36"
-        tools:text="Puntuación" />
+        app:layout_constraintVertical_bias="0.36" />
 
     <TextView
         android:id="@+id/textView9"

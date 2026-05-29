@@ -12,14 +12,14 @@
         android:layout_width="210dp"
         android:layout_height="48dp"
         android:ems="10"
-        android:inputType="text"
-        android:text="Correo"
+        android:hint="Correo"
+        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.396" />
+        app:layout_constraintVertical_bias="0.341" />
 
     <Button
         android:id="@+id/btn_Registrar"
@@ -49,11 +49,26 @@
         android:layout_width="210dp"
         android:layout_height="48dp"
         android:ems="10"
-        android:inputType="text"
-        android:text="Contraseña"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.453" />
+
+    <EditText
+        android:id="@+id/et_ContrasenaRegis2"
+        android:layout_width="210dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="Repite la contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.551" />
 </androidx.constraintlayout.widget.ConstraintLayout>

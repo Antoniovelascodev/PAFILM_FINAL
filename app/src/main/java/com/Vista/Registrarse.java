@@ -16,11 +16,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.Controlador.ControladorUsuario;
 import com.Modelo.pafilm_final.Usuario;
+import com.Modelo.pafilm_final.UsuarioDao;
 import com.equipo.pafilm_final.R;
 
 public class Registrarse extends AppCompatActivity {
     EditText etCorreoRegis;
     EditText etContrasenaRegis;
+    EditText etContrasenaRegis2;
     Button btnRegistrar;
     ImageView ivLogo;
     ControladorUsuario controladorUsuario;
@@ -35,6 +37,7 @@ public class Registrarse extends AppCompatActivity {
 
         etCorreoRegis = findViewById(R.id.et_CorreoRegis);
         etContrasenaRegis = findViewById(R.id.et_ContrasenaRegis);
+        etContrasenaRegis2 = findViewById(R.id.et_ContrasenaRegis2);
         btnRegistrar = findViewById(R.id.btn_Registrar);
         ivLogo = findViewById(R.id.imageView);
 
@@ -42,19 +45,36 @@ public class Registrarse extends AppCompatActivity {
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nombre = etCorreoRegis.getText().toString();
+                String correo = etCorreoRegis.getText().toString();
                 String pass = etContrasenaRegis.getText().toString();
+                String pass2 = etContrasenaRegis2.getText().toString();
 
-                if (nombre.isEmpty() || pass.isEmpty()) {
+                // 1. Comprobar que los campos no estén vacíos
+                if (correo.isEmpty() || pass.isEmpty() || pass2.isEmpty()) {
                     Toast.makeText(Registrarse.this, "Por favor, rellene todos los campos", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
+                // 2. Comprobar que las contraseñas coincidan
+                if (!pass.equals(pass2)) {
+                    Toast.makeText(Registrarse.this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // 3. Comprobar si el usuario ya existe
+                if (UsuarioDao.existeUsuario(Registrarse.this, correo)) {
+                    Toast.makeText(Registrarse.this, "Este correo ya está registrado", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // 4. Realizar el registro
                 int id = controladorUsuario.nuevoId(Registrarse.this);
-                Usuario nuevoUsuario = new Usuario(nombre, id, pass);
+                Usuario nuevoUsuario = new Usuario(correo, id, pass);
                 controladorUsuario.registrarUsuario(Registrarse.this, nuevoUsuario);
 
                 Toast.makeText(Registrarse.this, "Registro completado", Toast.LENGTH_SHORT).show();
+                
+                // Ir a la pantalla de selección
                 Intent intent = new Intent(Registrarse.this, Selector.class);
                 intent.putExtra("idUsuario", nuevoUsuario.getIdUsuario());
                 startActivity(intent);
@@ -62,7 +82,7 @@ public class Registrarse extends AppCompatActivity {
             }
         });
 
-        // pulsar la imagen hace que vuelvas al inicio de sesión
+        // Pulsar la imagen hace que vuelvas al inicio de sesión
         ivLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
