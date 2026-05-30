@@ -56,7 +56,7 @@ public class Contenido extends AppCompatActivity {
         ivLogo = findViewById(R.id.imageView7);
         btnPublicar = findViewById(R.id.btn_Publicar);
 
-        // El botón publicar guarda los datos en la base de datos a través de los controladores
+        // Botón publicar guardas los datos
         btnPublicar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,14 +96,13 @@ public class Contenido extends AppCompatActivity {
                         controladorContenido.crearContenido(Contenido.this, nuevoContenido);
                     }
 
-                    // Crea y guarda la reseña asociada al contenido
+                    // Crea y guarda la reseña
                     int idResena = controladorResena.nuevoId(Contenido.this);
                     Resena nuevaResena = new Resena(
                             idResena, tituloInput, resenaTexto, puntuacion, idUsuario, idContenido, esSpoiler);
                     controladorResena.crearResena(Contenido.this, nuevaResena);
 
-                    // La media se actualiza automáticamente en el DAO de Resena al llamar a crearResena
-
+                    // Actualiza la media
                     Toast.makeText(Contenido.this, "Publicado correctamente. La media se ha actualizado.", Toast.LENGTH_SHORT).show();
                     limpiarCampos();
 
@@ -123,7 +122,7 @@ public class Contenido extends AppCompatActivity {
             }
         });
 
-        // con esto no puedes marcar pelicula o serie a la vez
+        // Con esto no puedes marcar pelicula o serie a la vez
         cbPelicula.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

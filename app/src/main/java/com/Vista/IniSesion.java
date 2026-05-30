@@ -40,7 +40,7 @@ public class IniSesion extends AppCompatActivity {
         btnRegistrarIniSesion = findViewById(R.id.btn_Registrar);
         ivLogo = findViewById(R.id.imageView4);
 
-        // Al pulsar la imagen, volvemos a cargar el inicio de sesión
+        // Al pulsar la imagen se vuelve a cargar el inicio de sesión
         ivLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +83,7 @@ public class IniSesion extends AppCompatActivity {
             }
         });
 
-        // Botón Registrarse, lleva a la pantalla de registro
+        // Botón Registrarse
         btnRegistrarIniSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

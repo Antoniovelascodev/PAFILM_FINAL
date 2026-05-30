@@ -22,7 +22,7 @@ public class Selector extends AppCompatActivity {
         idUsuario = getIntent().getIntExtra("idUsuario", -1);
         
         if (idUsuario == -1) {
-            // Redirigir directamente a la pantalla de Inicio de Sesión si no hay usuario logueado
+            // Redirige directamente a la pantalla de Inicio de Sesión si no hay usuario logueado
             Intent intent = new Intent(Selector.this, IniSesion.class);
             startActivity(intent);
             finish();

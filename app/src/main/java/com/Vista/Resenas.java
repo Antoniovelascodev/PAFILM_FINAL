@@ -76,7 +76,7 @@ public class Resenas extends AppCompatActivity {
             return;
         }
 
-        // 1. Agrupar reseñas por título normalizado
+        // Agrupa reseñas por título
         Map<String, List<Resena>> grupos = new HashMap<>();
         for (Resena r : todasResenas) {
             String tituloNorm = ContenidoDao.normalizarTitulo(r.getTitulo());
@@ -86,7 +86,7 @@ public class Resenas extends AppCompatActivity {
             grupos.get(tituloNorm).add(r);
         }
 
-        // 2. Separar grupos en Películas y Series
+        // Separa grupos en Películas y Series
         List<Map.Entry<String, List<Resena>>> peliculas = new ArrayList<>();
         List<Map.Entry<String, List<Resena>>> series = new ArrayList<>();
 
@@ -100,7 +100,7 @@ public class Resenas extends AppCompatActivity {
             }
         }
 
-        // 3. Mostrar Sección Películas
+        // Muestra Sección Películas
         if (!peliculas.isEmpty()) {
             mostrarCabeceraSeccion("--- PELÍCULAS ---", Color.parseColor("#C2185B"));
             for (Map.Entry<String, List<Resena>> entry : peliculas) {
@@ -108,7 +108,7 @@ public class Resenas extends AppCompatActivity {
             }
         }
 
-        // 4. Mostrar Sección Series
+        // Mostrar Sección Series
         if (!series.isEmpty()) {
             mostrarCabeceraSeccion("--- SERIES ---", Color.parseColor("#1976D2"));
             for (Map.Entry<String, List<Resena>> entry : series) {

@@ -41,7 +41,7 @@ public class Registrarse extends AppCompatActivity {
         btnRegistrar = findViewById(R.id.btn_Registrar);
         ivLogo = findViewById(R.id.imageView);
 
-        // Pulsar el botón registrarse lleva a la pantalla de contenido
+        // Pulsar el botón registrarse lleva a la pantalla contenido
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,32 +49,32 @@ public class Registrarse extends AppCompatActivity {
                 String pass = etContrasenaRegis.getText().toString();
                 String pass2 = etContrasenaRegis2.getText().toString();
 
-                // 1. Comprobar que los campos no estén vacíos
+                // Comprueba q no estén vacios los campos
                 if (correo.isEmpty() || pass.isEmpty() || pass2.isEmpty()) {
                     Toast.makeText(Registrarse.this, "Por favor, rellene todos los campos", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // 2. Comprobar que las contraseñas coincidan
+                // Comprueba que las contraseñas coincidan
                 if (!pass.equals(pass2)) {
                     Toast.makeText(Registrarse.this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // 3. Comprobar si el usuario ya existe
+                // Comprueba si el usuario ya existe
                 if (UsuarioDao.existeUsuario(Registrarse.this, correo)) {
                     Toast.makeText(Registrarse.this, "Este correo ya está registrado", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // 4. Realizar el registro
+                // Realiza el registro
                 int id = controladorUsuario.nuevoId(Registrarse.this);
                 Usuario nuevoUsuario = new Usuario(correo, id, pass);
                 controladorUsuario.registrarUsuario(Registrarse.this, nuevoUsuario);
 
                 Toast.makeText(Registrarse.this, "Registro completado", Toast.LENGTH_SHORT).show();
                 
-                // Ir a la pantalla de selección
+                // lleva a la pantalla de selección
                 Intent intent = new Intent(Registrarse.this, Selector.class);
                 intent.putExtra("idUsuario", nuevoUsuario.getIdUsuario());
                 startActivity(intent);
