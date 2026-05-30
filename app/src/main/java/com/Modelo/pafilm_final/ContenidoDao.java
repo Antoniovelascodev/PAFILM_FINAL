@@ -152,6 +152,23 @@ public class ContenidoDao {
         }
     }
 
+    // Métodos solicitados para normalizar texto y evitar duplicados por formato
+    public static String normalizarTitulo(String titulo) {
+        if (titulo == null) return "";
+        return titulo.trim().replaceAll("\\s+", " ").toLowerCase();
+    }
+
+    public static Contenido buscarPorTituloExacto(Context context, String titulo) {
+        List<Contenido> todos = obtenerContenidos(context);
+        String buscado = normalizarTitulo(titulo);
+        for (Contenido c : todos) {
+            if (normalizarTitulo(c.getTitulo()).equals(buscado)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
     public static int nuevoIdContenido(Context context) {
         SQLiteDatabase db = conectar(context);
         int id = 1;

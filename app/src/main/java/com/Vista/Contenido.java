@@ -60,14 +60,14 @@ public class Contenido extends AppCompatActivity {
         btnPublicar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String titulo = etTitulo.getText().toString();
+                String tituloInput = etTitulo.getText().toString();
                 String puntuacionStr = etPuntuacion.getText().toString();
                 String resenaTexto = etResena.getText().toString();
                 boolean esPelicula = cbPelicula.isChecked();
                 boolean esSerie = cbSerie.isChecked();
                 boolean esSpoiler = cbSpoiler.isChecked();
 
-                if (titulo.isEmpty() || puntuacionStr.isEmpty() || resenaTexto.isEmpty()) {
+                if (tituloInput.isEmpty() || puntuacionStr.isEmpty() || resenaTexto.isEmpty()) {
                     Toast.makeText(Contenido.this, "Por favor, rellene los campos obligatorios", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -81,19 +81,30 @@ public class Contenido extends AppCompatActivity {
                     float puntuacion = Float.parseFloat(puntuacionStr);
                     String tipo = esPelicula ? "Película" : "Serie";
 
-                    // Crea y guarda el contenido
-                    int idContenido = controladorContenido.nuevoId(Contenido.this);
-                    com.Modelo.pafilm_final.Contenido nuevoContenido = new com.Modelo.pafilm_final.Contenido(
-                            idContenido, titulo, 2024, (double) puntuacion, tipo, esSpoiler);
-                    controladorContenido.crearContenido(Contenido.this, nuevoContenido);
+                    // BUSCAR SI EL CONTENIDO YA EXISTE (para hacer la media)
+                    com.Modelo.pafilm_final.Contenido existente = controladorContenido.buscarPorTituloExacto(Contenido.this, tituloInput);
+                    int idContenido;
 
-                    // Crea y guarda la reseña
+                    if (existente != null) {
+                        // Si ya existe, usamos su ID para agrupar la reseña
+                        idContenido = existente.getIdContenido();
+                    } else {
+                        // Si no existe, creamos el contenido nuevo
+                        idContenido = controladorContenido.nuevoId(Contenido.this);
+                        com.Modelo.pafilm_final.Contenido nuevoContenido = new com.Modelo.pafilm_final.Contenido(
+                                idContenido, tituloInput, 2024, (double) puntuacion, tipo, esSpoiler);
+                        controladorContenido.crearContenido(Contenido.this, nuevoContenido);
+                    }
+
+                    // Crea y guarda la reseña asociada al contenido
                     int idResena = controladorResena.nuevoId(Contenido.this);
                     Resena nuevaResena = new Resena(
-                            idResena, titulo, resenaTexto, puntuacion, idUsuario, idContenido, esSpoiler);
+                            idResena, tituloInput, resenaTexto, puntuacion, idUsuario, idContenido, esSpoiler);
                     controladorResena.crearResena(Contenido.this, nuevaResena);
 
-                    Toast.makeText(Contenido.this, "Publicado correctamente", Toast.LENGTH_SHORT).show();
+                    // La media se actualiza automáticamente en el DAO de Resena al llamar a crearResena
+
+                    Toast.makeText(Contenido.this, "Publicado correctamente. La media se ha actualizado.", Toast.LENGTH_SHORT).show();
                     limpiarCampos();
 
                 } catch (NumberFormatException e) {

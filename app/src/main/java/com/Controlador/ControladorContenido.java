@@ -24,6 +24,10 @@ public class ControladorContenido {
         return ContenidoDao.buscarPorTitulo(context, titulo);
     }
 
+    public Contenido buscarPorTituloExacto(Context context, String titulo) {
+        return ContenidoDao.buscarPorTituloExacto(context, titulo);
+    }
+
     public List<Contenido> porTipo(Context context, String tipo) {
         return ContenidoDao.obtenerPorTipo(context, tipo);
     }
