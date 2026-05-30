@@ -20,14 +20,6 @@ public class ControladorResena {
         return ResenaDao.obtenerResenas(context);
     }
 
-    public List<Resena> porUsuario(Context context, int idUsuario) {
-        return ResenaDao.obtenerPorUsuario(context, idUsuario);
-    }
-
-    public List<Resena> porContenido(Context context, int idContenido) {
-        return ResenaDao.obtenerPorContenido(context, idContenido);
-    }
-
     public int nuevoId(Context context) {
         return ResenaDao.nuevoIdResena(context);
     }
