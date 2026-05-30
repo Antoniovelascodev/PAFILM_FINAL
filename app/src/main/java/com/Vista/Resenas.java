@@ -64,10 +64,10 @@ public class Resenas extends AppCompatActivity {
             }
         });
 
-        cargarCategoriasAgrupadas();
+        cargarAgrupadoPorObra();
     }
 
-    private void cargarCategoriasAgrupadas() {
+    private void cargarAgrupadoPorObra() {
         layoutResenas.removeAllViews();
         List<Resena> todasResenas = controladorResena.obtenerTodas(this);
 
@@ -76,121 +76,119 @@ public class Resenas extends AppCompatActivity {
             return;
         }
 
-        // Agrupa reseñas por título
-        Map<String, List<Resena>> grupos = new HashMap<>();
+        // 1. Agrupamos TODAS las reseñas por el título normalizado (esto une Historias Corrientes con historias corrientes)
+        Map<String, List<Resena>> mapaGrupos = new HashMap<>();
         for (Resena r : todasResenas) {
-            String tituloNorm = ContenidoDao.normalizarTitulo(r.getTitulo());
-            if (!grupos.containsKey(tituloNorm)) {
-                grupos.put(tituloNorm, new ArrayList<>());
+            String clave = ContenidoDao.normalizarTitulo(r.getTitulo());
+            if (!mapaGrupos.containsKey(clave)) {
+                mapaGrupos.put(clave, new ArrayList<>());
             }
-            grupos.get(tituloNorm).add(r);
+            List<Resena> lista = mapaGrupos.get(clave);
+            if (lista != null) {
+                lista.add(r);
+            }
         }
 
-        // Separa grupos en Películas y Series
-        List<Map.Entry<String, List<Resena>>> peliculas = new ArrayList<>();
-        List<Map.Entry<String, List<Resena>>> series = new ArrayList<>();
+        // 2. Clasificamos los grupos en Películas y Series para mostrarlos por separado
+        List<List<Resena>> listaPeliculas = new ArrayList<>();
+        List<List<Resena>> listaSeries = new ArrayList<>();
 
-        for (Map.Entry<String, List<Resena>> entry : grupos.entrySet()) {
-            int idCont = entry.getValue().get(0).getIdContenido();
+        for (List<Resena> grupo : mapaGrupos.values()) {
+            if (grupo.isEmpty()) continue;
+            
+            // Miramos el tipo del contenido (cogemos el de la primera reseña del grupo)
+            int idCont = grupo.get(0).getIdContenido();
             Contenido c = controladorContenido.obtenerUno(this, idCont);
+            
             if (c != null && "Serie".equalsIgnoreCase(c.getTipo())) {
-                series.add(entry);
+                listaSeries.add(grupo);
             } else {
-                peliculas.add(entry);
+                listaPeliculas.add(grupo);
             }
         }
 
-        // Muestra Sección Películas
-        if (!peliculas.isEmpty()) {
-            mostrarCabeceraSeccion("--- PELÍCULAS ---", Color.parseColor("#C2185B"));
-            for (Map.Entry<String, List<Resena>> entry : peliculas) {
-                crearCategoriaObra(entry.getValue());
-            }
+        // 3. Dibujamos la sección de PELÍCULAS
+        if (!listaPeliculas.isEmpty()) {
+            crearSeccionVisual("--- PELÍCULAS ---", Color.parseColor("#880E4F"), listaPeliculas);
         }
 
-        // Mostrar Sección Series
-        if (!series.isEmpty()) {
-            mostrarCabeceraSeccion("--- SERIES ---", Color.parseColor("#1976D2"));
-            for (Map.Entry<String, List<Resena>> entry : series) {
-                crearCategoriaObra(entry.getValue());
-            }
+        // 4. Dibujamos la sección de SERIES
+        if (!listaSeries.isEmpty()) {
+            crearSeccionVisual("--- SERIES ---", Color.parseColor("#0D47A1"), listaSeries);
         }
     }
 
-    private void mostrarCabeceraSeccion(String texto, int color) {
-        TextView tv = new TextView(this);
-        tv.setText(texto);
-        tv.setTextSize(24);
-        tv.setTypeface(null, Typeface.BOLD);
-        tv.setTextColor(color);
-        tv.setPadding(20, 40, 20, 20);
-        tv.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        layoutResenas.addView(tv);
-    }
+    private void crearSeccionVisual(String tituloSeccion, int color, List<List<Resena>> grupos) {
+        // Cabecera de bloque (PELICULAS / SERIES)
+        TextView tvCabecera = new TextView(this);
+        tvCabecera.setText(tituloSeccion);
+        tvCabecera.setTextSize(24);
+        tvCabecera.setTypeface(null, Typeface.BOLD);
+        tvCabecera.setTextColor(color);
+        tvCabecera.setPadding(20, 50, 20, 20);
+        tvCabecera.setGravity(View.TEXT_ALIGNMENT_CENTER);
+        layoutResenas.addView(tvCabecera);
 
-    private void crearCategoriaObra(List<Resena> resenas) {
-        String tituloOriginal = resenas.get(0).getTitulo();
-        
-        // Calcular media
-        float suma = 0;
-        for (Resena r : resenas) {
-            suma += r.getNota();
-        }
-        float media = suma / resenas.size();
+        // Por cada obra en este bloque
+        for (List<Resena> obraResenas : grupos) {
+            float sumaNotas = 0;
+            for (Resena r : obraResenas) {
+                sumaNotas += r.getNota();
+            }
+            float mediaFinal = sumaNotas / obraResenas.size();
+            String tituloPrincipal = obraResenas.get(0).getTitulo();
 
-        // Contenedor de la Categoría (La película en sí)
-        LinearLayout catContainer = new LinearLayout(this);
-        catContainer.setOrientation(LinearLayout.VERTICAL);
-        catContainer.setPadding(20, 20, 20, 10);
-        catContainer.setBackgroundColor(Color.parseColor("#F0F4F8"));
-        LinearLayout.LayoutParams paramsCat = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        paramsCat.setMargins(10, 20, 10, 10);
-        catContainer.setLayoutParams(paramsCat);
+            // Contenedor de la Categoría de la Película
+            LinearLayout obraContainer = new LinearLayout(this);
+            obraContainer.setOrientation(LinearLayout.VERTICAL);
+            obraContainer.setPadding(20, 20, 20, 15);
+            obraContainer.setBackgroundColor(Color.parseColor("#ECEFF1"));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(15, 25, 15, 10);
+            obraContainer.setLayoutParams(params);
 
-        TextView tvTitulo = new TextView(this);
-        tvTitulo.setText(tituloOriginal.toUpperCase());
-        tvTitulo.setTextSize(18);
-        tvTitulo.setTypeface(null, Typeface.BOLD);
-        tvTitulo.setTextColor(Color.BLACK);
-        catContainer.addView(tvTitulo);
+            // Título de la obra
+            TextView tvT = new TextView(this);
+            tvT.setText(tituloPrincipal.toUpperCase());
+            tvT.setTextSize(20);
+            tvT.setTypeface(null, Typeface.BOLD);
+            tvT.setTextColor(Color.BLACK);
+            obraContainer.addView(tvT);
 
-        TextView tvMedia = new TextView(this);
-        tvMedia.setText("MEDIA: " + String.format(Locale.getDefault(), "%.1f", media) + " / 10");
-        tvMedia.setTextSize(15);
-        tvMedia.setTextColor(Color.parseColor("#388E3C")); // Verde
-        tvMedia.setTypeface(null, Typeface.BOLD_ITALIC);
-        catContainer.addView(tvMedia);
+            // Nota Media (Calculada entre todas las reseñas de este grupo)
+            TextView tvM = new TextView(this);
+            tvM.setText("VALORACIÓN MEDIA: " + String.format(Locale.getDefault(), "%.2f", mediaFinal) + " / 10");
+            tvM.setTextSize(16);
+            tvM.setTextColor(Color.parseColor("#2E7D32"));
+            tvM.setTypeface(null, Typeface.BOLD_ITALIC);
+            obraContainer.addView(tvM);
 
-        layoutResenas.addView(catContainer);
+            layoutResenas.addView(obraContainer);
 
-        // Listado de reseñas de esta categoría
-        for (Resena r : resenas) {
-            LinearLayout item = new LinearLayout(this);
-            item.setOrientation(LinearLayout.VERTICAL);
-            item.setPadding(40, 10, 20, 10);
+            // Reseñas de los usuarios para esta obra
+            for (Resena res : obraResenas) {
+                TextView tvR = new TextView(this);
+                String sp = res.isSpoiler() ? "[ALERTA SPOILER] " : "";
+                tvR.setText(sp + "Nota: " + res.getNota() + " - " + res.getComentario());
+                tvR.setTextSize(14);
+                tvR.setPadding(50, 10, 30, 10);
+                layoutResenas.addView(tvR);
+            }
             
-            TextView tvResenaText = new TextView(this);
-            String spoilerTag = r.isSpoiler() ? "[SPOILER] " : "";
-            tvResenaText.setText(spoilerTag + "Nota: " + r.getNota() + " - " + r.getComentario());
-            tvResenaText.setTextSize(14);
-            item.addView(tvResenaText);
-            
-            layoutResenas.addView(item);
+            // Separador entre obras
+            View sep = new View(this);
+            sep.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 3));
+            sep.setBackgroundColor(Color.LTGRAY);
+            layoutResenas.addView(sep);
         }
-        
-        // Separador fino
-        View v = new View(this);
-        v.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2));
-        v.setBackgroundColor(Color.GRAY);
-        layoutResenas.addView(v);
     }
 
     private void mostrarMensajeVacio() {
         TextView tv = new TextView(this);
-        tv.setText("No hay nada que mostrar aún.");
+        tv.setText("Todavía no se ha publicado ninguna reseña.");
         tv.setTextSize(18);
-        tv.setPadding(20, 100, 20, 20);
+        tv.setPadding(30, 150, 30, 30);
         layoutResenas.addView(tv);
     }
 }
