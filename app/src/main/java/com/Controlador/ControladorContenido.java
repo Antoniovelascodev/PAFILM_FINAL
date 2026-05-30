@@ -39,4 +39,8 @@ public class ControladorContenido {
     public int nuevoId(Context context) {
         return ContenidoDao.nuevoIdContenido(context);
     }
+
+    public String normalizarTitulo(String titulo) {
+        return ContenidoDao.normalizarTitulo(titulo);
+    }
 }

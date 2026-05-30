@@ -16,7 +16,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.Controlador.ControladorUsuario;
 import com.Modelo.pafilm_final.Usuario;
-import com.Modelo.pafilm_final.UsuarioDao;
 import com.equipo.pafilm_final.R;
 
 public class Registrarse extends AppCompatActivity {
@@ -62,7 +61,7 @@ public class Registrarse extends AppCompatActivity {
                 }
 
                 // Comprueba si el usuario ya existe
-                if (UsuarioDao.existeUsuario(Registrarse.this, correo)) {
+                if (controladorUsuario.existeUsuario(Registrarse.this, correo)) {
                     Toast.makeText(Registrarse.this, "Este correo ya está registrado", Toast.LENGTH_SHORT).show();
                     return;
                 }

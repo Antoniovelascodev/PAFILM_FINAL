@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,7 +19,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.Controlador.ControladorContenido;
 import com.Controlador.ControladorResena;
 import com.Modelo.pafilm_final.Contenido;
-import com.Modelo.pafilm_final.ContenidoDao;
 import com.Modelo.pafilm_final.Resena;
 import com.equipo.pafilm_final.R;
 
@@ -79,7 +79,7 @@ public class Resenas extends AppCompatActivity {
         // 1. Agrupamos TODAS las reseñas por el título normalizado (esto une Historias Corrientes con historias corrientes)
         Map<String, List<Resena>> mapaGrupos = new HashMap<>();
         for (Resena r : todasResenas) {
-            String clave = ContenidoDao.normalizarTitulo(r.getTitulo());
+            String clave = controladorContenido.normalizarTitulo(r.getTitulo());
             if (!mapaGrupos.containsKey(clave)) {
                 mapaGrupos.put(clave, new ArrayList<>());
             }
@@ -126,7 +126,7 @@ public class Resenas extends AppCompatActivity {
         tvCabecera.setTypeface(null, Typeface.BOLD);
         tvCabecera.setTextColor(color);
         tvCabecera.setPadding(20, 50, 20, 20);
-        tvCabecera.setGravity(View.TEXT_ALIGNMENT_CENTER);
+        tvCabecera.setGravity(Gravity.CENTER);
         layoutResenas.addView(tvCabecera);
 
         // Por cada obra en este bloque

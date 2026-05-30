@@ -24,4 +24,8 @@ public class ControladorUsuario {
     public int nuevoId(Context context) {
         return UsuarioDao.nuevoIdUsuario(context);
     }
+
+    public boolean existeUsuario(Context context, String nombre) {
+        return UsuarioDao.existeUsuario(context, nombre);
+    }
 }
